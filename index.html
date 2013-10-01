@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>tic-tac-toe</title>
+      
+
+      <link rel="stylesheet" href="css/normalize.css">
+      <!-- html5 boilerplate -->
+      <link rel="stylesheet" href="css/mystyle.css"> 
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">   
+  </head>
+
+
+<body>
+
+
+
+<header>tic-tac-toe</header>  
+
+<div id="notification">
+Player 1 - Your Turn
+</div>
+
+
+<div id="container">
+
+
+<div id="message_overlay">
+  Message Overlay
+  <br>
+
+  <input type="button" id="btn2" value="Start Again" onclick="startAgain()"/>
+  
+</div>
+
+
+
+
+
+<div id="column1">
+  <div id="cell1_1" onclick="playBox()"/></div>
+  <div id="cell1_2" onclick="playBox()"></div>
+  <div id="cell1_3" onclick="playBox()"></div>
+</div>
+
+<div id="column2">
+  <div id="cell1_4" onclick="playBox()"></div>
+  <div id="cell1_5" onclick="playBox()"></div>
+  <div id="cell1_6" onclick="playBox()"></div>
+</div>
+
+<div id="column3">
+  <div id="cell1_7" onclick="playBox()"></div>
+  <div id="cell1_8" onclick="playBox()"></div>
+  <div id="cell1_9" onclick="playBox()"></div>
+</div>
+
+
+
+
+</div>   <!-- end container -->
+
+
+
+<input type="button" id="btn1" value="Quit and Start Again" onclick="startAgain()"/>
+
+
+  </body>
+
+
+
+<script>
+
+
+    var player_turn = 1;
+
+
+var cellArray = [0,1,2,3,4,5,6,7,8];
+
+
+
+
+
+    function playBox() {
+
+
+      if (event.target.innerHTML != "X" && event.target.innerHTML != "O") {
+
+      if (player_turn % 2) {
+
+      event.target.innerHTML="X";
+      }
+
+
+    else {
+    event.target.innerHTML = "O";
+    }
+    
+    document.getElementById("notification").innerHTML = "Player "+((player_turn % 2)+1)+" - your turn!";
+
+    player_turn++;
+
+
+
+
+      for (i=0; i<9; ++i)
+      {
+   
+      cellArray[i] =  document.getElementById("cell1_"+(i+1)).innerHTML;
+
+    
+    }   
+
+  
+
+   
+    // WHAT HAPPENS IF YOU WIN / TIE
+
+         
+
+      function win()
+       {
+
+        document.getElementById("message_overlay").style.zIndex = "2";
+        document.getElementById("message_overlay").innerHTML = "Player "+ ((player_turn % 2)+1) + " wins! " +"<br/>"+ "<input type='button' id='btn2' value='Start Again' onclick='startAgain()'/>";
+        document.getElementById("notification").innerHTML = "";
+     
+        }
+
+        function tie()
+        {
+           document.getElementById("message_overlay").style.zIndex = "2";
+           document.getElementById("message_overlay").innerHTML = "You both tied! " +"<br/>"+ "<input type='button' id='btn2' value='Start Again' onclick='startAgain()'/>";
+           document.getElementById("notification").innerHTML = "";
+
+        }
+
+      // end test to see if they clicked an already filled block
+     } 
+
+
+        // TEST FOR WIN
+
+        if ( player_turn > 4 )
+        {
+
+
+        
+         
+          if (cellArray[0] == cellArray[3] && cellArray[3] != "" && cellArray[3] == cellArray[6])
+              win();
+            
+          else if (cellArray[1] == cellArray[4] && cellArray[4] != "" && cellArray[4] == cellArray[7])
+              win();
+
+          else if (cellArray[2] == cellArray[5] && cellArray[5] != "" && cellArray[5] == cellArray[8])
+            { 
+             
+              win();
+            }
+          else if (cellArray[0] == cellArray[1] && cellArray[1] != "" && cellArray[1] == cellArray[2])
+            { 
+            
+              win();
+            }
+          else if (cellArray[3] == cellArray[4] && cellArray[4] != "" && cellArray[4] == cellArray[5])
+            { 
+            
+              win();
+            }
+          else if (cellArray[6] == cellArray[7] && cellArray[7] != "" && cellArray[7] == cellArray[8])
+            { 
+             
+              win();
+            }
+          else if (cellArray[0] == cellArray[4] && cellArray[4] != "" && cellArray[4] == cellArray[8])
+            { 
+            
+              win();
+            }
+          else if (cellArray[2] == cellArray[4] && cellArray[4] != "" && cellArray[4] == cellArray[6])
+            { 
+           
+              win();
+            } 
+          else if (player_turn > 9)
+            {
+             
+              tie(); 
+
+            }
+
+          }
+
+       // end playBox
+  }
+
+
+
+
+    function startAgain() {
+
+    location.href="index.html";
+
+  }
+
+
+  
+
+</script>
+
